@@ -40,14 +40,17 @@ if uploaded_file is not None:
 
     IMG_SIZE = 224  # or whatever size you want
 
+
     # Preprocess the image
     image = image.resize((IMG_SIZE, IMG_SIZE))
     image = image.convert('RGB')  # Ensure the image is in RGB format
     image = np.array(image) / 255.0
+    image = image.astype('float32')  # Convert the image to float32
     image = np.expand_dims(image, axis=0)
 
     # Set the tensor to point to the input data to be used for prediction
     interpreter.set_tensor(input_details[0]['index'], image)
+
 
     # Run the computations
     interpreter.invoke()
