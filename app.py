@@ -4,7 +4,7 @@ import tensorflow as tf
 import numpy as np
 
 # Load the trained model
-model = tf.keras.models.load_model('bug_classifier.h5')
+model = tf.keras.models.load_model('bug_classifier.h5', compile=False)
 
 # Define the bug categories
 categories = ['Functional', 'System', 'Usability', 'Security']
@@ -40,7 +40,6 @@ if uploaded_file is not None:
     image = image.convert('RGB')  # Ensure the image is in RGB format
     image = np.array(image) / 255.0
     image = np.expand_dims(image, axis=0)
-
 
     # Make a prediction
     predictions = model.predict(image)
